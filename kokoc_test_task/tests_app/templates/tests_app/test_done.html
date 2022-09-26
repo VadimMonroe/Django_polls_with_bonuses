@@ -1,0 +1,9 @@
+{% extends 'tests_app/base.html' %}
+
+{% block content %}
+<ul class="tests_list">
+    <li class="test">Вы заработали: {{ user_bonus }} бонусов!</li>
+    <li class="test">Вы завершили тест: {{ user_test }}</li>
+</ul>
+
+{% endblock %}

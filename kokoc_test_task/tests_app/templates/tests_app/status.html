@@ -1,0 +1,14 @@
+{% extends 'tests_app/base.html' %}
+
+{% block content %}
+
+<div class="status">
+{% for user in users %}
+    <div class="login">{{ user.login }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        баллы: {{ user.points }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        сделанные тесты: {{ user.done_tests }}
+        <div class="color-box" style="background: {{ user.color }}"></div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

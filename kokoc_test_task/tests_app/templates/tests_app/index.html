@@ -1,0 +1,10 @@
+{% extends 'tests_app/base.html' %}
+
+{% block content %}
+<ul class="tests_list">
+    {% for test in tests_names %}
+    <li class="test"><a href="{% url 'test_detail' test.id %}">{{ test }}</a></li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

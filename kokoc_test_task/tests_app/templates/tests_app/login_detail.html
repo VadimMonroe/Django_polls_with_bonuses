@@ -1,0 +1,54 @@
+{% extends 'tests_app/base.html' %}
+
+{% block content %}
+
+<ul class="tests_list">
+    <h1 class="test">Личные данные</h1>
+    <li class="user-info">{{ user_points.login }}</li>
+    <li class="user-info">Баллы - {{ user_points.points }}</li>
+
+    <h1 class="test">Магазин</h1>
+
+    <form id="shop-form" method="POST">{% csrf_token %}
+        {% for good in goods %}
+        <div class="color-shop">
+            <p>
+                <input type="radio" name="shop" value="{{ good.name }}" data-price="{{ good.price }}" checked>
+                Бэкграунд в
+                </input>
+            </p>
+            <div class="color-box" style="background: {{ good.color }}"></div>
+            <p> за {{ good.price }} баллов </p>
+        </div>
+        {% endfor %}
+    </form>
+    <button class="form-button" id="submit-button">Купить</button>
+</ul>
+
+<script>
+document.body.style.background = '{{ user_points.color }}';
+
+const form = document.getElementById('shop-form');
+const submitBtn = document.querySelector('.form-button');
+
+submitButtonCheck = () => {
+    const allInputs = form.querySelectorAll('input');
+    const checked = allInputs;
+
+    for(let i = 0; i < allInputs.length; i++) {
+        if (allInputs[i].checked) {
+            checkedElement = allInputs[i].dataset.price;
+            if ( ({{ user_points.points }} - checkedElement) >= 0 ) {
+                form.submit();
+            } else {
+                let errorElement = document.createElement('p');
+                errorElement.textContent = 'Не хватает баллов!';
+                form.appendChild(errorElement);
+            }
+        };
+    }
+}
+
+submitBtn.addEventListener('click', submitButtonCheck);
+</script>
+{% endblock %}
