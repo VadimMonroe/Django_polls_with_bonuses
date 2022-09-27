@@ -3,21 +3,21 @@
 {% block content %}
 <ul class="status_list">
     <form id="question-form" method="POST">{% csrf_token %}
-    {% for question in test_questions %}
+        {% for question in test_questions %}
         {% if question.test_name.id == pk %}
-            <li class="test">{{ question.question }}</li>
-            {% for answer in answers %}
-                {% if answer.test_name.id == question.id %}
-                    <li class="test-answer">
-                        <input type="radio" name="{{ question.id }}"
-                               value="{{ answer.bonus }}|{{ question.test_name }}|{{ user.id }}">
-                               {{ answer }}
-                        </input>
-                    </li>
-                {% endif %}
-            {% endfor %}
+        <li class="test">{{ question.question }}</li>
+        {% for answer in answers %}
+        {% if answer.test_name.id == question.id %}
+        <li class="test-answer">
+            <input type="radio" name="{{ question.id }}"
+                   value="{{ answer.bonus }}|{{ question.test_name }}|{{ user.id }}">
+            {{ answer }}
+            </input>
+        </li>
         {% endif %}
-    {% endfor %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
     </form>
     <button class="form-button" id="submit-button">Отправить</button>
 </ul>
@@ -43,5 +43,6 @@ submitButtonCheck = () => {
 }
 
 submitBtn.addEventListener('click', submitButtonCheck);
+
 </script>
 {% endblock %}

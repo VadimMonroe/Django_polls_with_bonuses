@@ -1,21 +1,16 @@
 from django.contrib.auth import logout, login
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic import CreateView, DetailView
 from django.contrib.auth.views import LoginView
 from .forms import RegisterUserForm, LoginUserForm
 from .models import *
+from .services import get_test_results, save_buy_color_user_info
 
 
-class Index(View):
-    """Выдаём все тесты на сайт"""
-
-    def get(self, request):
-        tests = TestsNames.objects.all()
-        context = {'tests_names': tests}
-        return render(request, 'tests_app/index.html', context)
+def index(request):
+    tests = TestsNames.objects.all()
+    return render(request, 'tests_app/index.html', {'tests_names': tests})
 
 
 def logout_user(request):
@@ -25,8 +20,7 @@ def logout_user(request):
 
 def status(request):
     users = UsersPoints.objects.all()
-    context = {'users': users}
-    return render(request, 'tests_app/status.html', context)
+    return render(request, 'tests_app/status.html', {'users': users})
 
 
 class Register(CreateView):
@@ -69,31 +63,7 @@ class TestDetail(DetailView):
         return render(request, 'tests_app/test_detail.html', context)
 
     def post(self, request, pk=None):
-        all_answers_list = []
-        [all_answers_list.append(i) for i in request.POST.values()]
-
-        user_bonus = 0
-        user_test = None
-        user_inner = None
-        for bonus in all_answers_list[1:]:
-            bonus = bonus.split('|')
-            print(bonus, bonus[0])
-            user_bonus += int(bonus[0])
-            if not user_test:
-                user_test = bonus[1]
-            if not user_inner:
-                user_inner = bonus[2]
-
-        user = UsersPoints.objects.get(login=user_inner)
-        user.points += user_bonus
-
-        if user.done_tests == '0':
-            user.done_tests = user_test
-        else:
-            if user_test not in user.done_tests:
-                user.done_tests += user_test
-        user.save()
-        # questions = TestsQuestions.objects.all()
+        user_bonus, user_test = get_test_results(request)
         context = {'user_bonus': user_bonus, 'user_test': user_test}
         return render(request, 'tests_app/test_done.html', context)
 
@@ -108,16 +78,8 @@ class LoginDetail(DetailView):
         return render(request, 'tests_app/login_detail.html', context)
 
     def post(self, request, pk=None):
-        purchased_color = request.POST.get('shop');
         goods = Goods.objects.all()
         users_points = UsersPoints.objects.filter(pk=pk)[0]
         context = {'pk': pk, 'user_points': users_points, 'goods': goods}
-
-        tapped_good = goods.get(name=purchased_color)
-        print(users_points.points, tapped_good.price)
-        if users_points.color != purchased_color:
-            if users_points.points - tapped_good.price >= 0:
-                users_points.points = users_points.points - tapped_good.price
-                users_points.color = purchased_color
-        users_points.save()
+        save_buy_color_user_info(request, goods, users_points)
         return render(request, 'tests_app/login_detail.html', context)
