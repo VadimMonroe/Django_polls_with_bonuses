@@ -3,12 +3,12 @@
 {% block content %}
 
 <ul class="tests_list">
+
     <h1 class="test">Личные данные</h1>
     <li class="user-info">{{ user_points.login }}</li>
     <li class="user-info">Баллы: {{ user_points.points }}</li>
 
     <h1 class="test">Магазин</h1>
-
     <form id="shop-form" method="POST">{% csrf_token %}
         {% for good in goods %}
         <div class="color-shop">

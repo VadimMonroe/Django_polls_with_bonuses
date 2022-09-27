@@ -23,8 +23,6 @@
 </ul>
 
 <script>
-<!--document.body.style.background = '{{ user_points.color }}';-->
-
 const form = document.getElementById('question-form');
 const submitBtn = document.querySelector('.form-button');
 
@@ -38,7 +36,7 @@ submitButtonCheck = () => {
             checkedElement = allInputs[i].dataset.price;
             checkedElementList.push(checkedElement);
         };
-    form.submit('adasda');
+    form.submit();
     }
 }
 
