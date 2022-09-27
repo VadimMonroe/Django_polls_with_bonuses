@@ -12,7 +12,7 @@
 
 6. http://localhost:8000
 
-<h>Функциональность</h1>
+<h1>Функциональность</h1>
 
 <img width="1259" alt="Screenshot 2022-09-27 at 02 43 37" src="https://user-images.githubusercontent.com/82668410/192399874-0a4f8cb1-0eb3-4d7d-ae05-6b9f461ea300.png">
 <img width="1256" alt="Screenshot 2022-09-27 at 02 44 37" src="https://user-images.githubusercontent.com/82668410/192399881-05bf9523-f918-4529-85df-b7d2ca4e694d.png">
@@ -21,7 +21,7 @@
 <img width="1349" alt="Screenshot 2022-09-27 at 02 45 06" src="https://user-images.githubusercontent.com/82668410/192399891-c0aaa3b8-e5da-4cb7-8a09-bee66eeb28b4.png">
 <img width="1277" alt="Screenshot 2022-09-27 at 02 45 20" src="https://user-images.githubusercontent.com/82668410/192399893-d9761925-3892-4811-8011-05bd92543f8e.png">
 
-<h>Настроена Админка</h1>
+<h1>Настроена Админка</h1>
 
 <img width="1428" alt="Screenshot 2022-09-27 at 14 09 48" src="https://user-images.githubusercontent.com/82668410/192510487-8b709e28-d69a-4b5e-8c9e-e589db5cf085.png">
 <img width="1410" alt="Screenshot 2022-09-27 at 14 10 07" src="https://user-images.githubusercontent.com/82668410/192510495-6db34298-4b5f-409a-a168-38c021871b17.png">
