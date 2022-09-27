@@ -8,9 +8,13 @@
 
 4. pip install requirements.txt
 
-5. python manage.py runserver     
+5. python manage.py createsuperuser 
 
-6. http://localhost:8000
+6. python manage.py makemigrations
+
+7. python manage.py migrate
+
+8. python manage.py runserver 
 
 <h1>Функциональность</h1>
 
