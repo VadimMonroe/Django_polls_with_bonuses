@@ -16,6 +16,8 @@
 
 8. python manage.py runserver 
 
+9. http://localhost:8000
+
 <h1>Функциональность</h1>
 
 <img width="1259" alt="Screenshot 2022-09-27 at 02 43 37" src="https://user-images.githubusercontent.com/82668410/192399874-0a4f8cb1-0eb3-4d7d-ae05-6b9f461ea300.png">
